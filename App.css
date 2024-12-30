@@ -33,7 +33,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/images/chatbot-logo.jpg');
+  background-image: url('/images/chatbot.jpg');
   background-repeat: repeat;
   background-size: cover;
   background-position: center;
@@ -155,12 +155,14 @@
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 180px; /* Adjust width as needed */
+  height: auto; /* Allow flexible height */
 }
 
 .laptop-item img {
-  width: 160px;
-  height: 100px;
-  object-fit: cover;
+  width: 100%;  /* Ensure the image fills the container width */
+  height: auto; /* Keep the aspect ratio intact */
+  object-fit: contain; /* Ensures the entire image is visible without clipping */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -194,8 +196,8 @@
   }
 
   .laptop-item img {
-    width: 120px;
-    height: 80px;
+    width: 100%;  /* Ensure image is responsive */
+    height: auto;
   }
 }
 
@@ -205,11 +207,113 @@
   }
 
   .laptop-item img {
-    width: 100px;
-    height: 70px;
+    width: 100%;  /* Ensure image is responsive */
+    height: auto;
   }
 
   .search-bar input {
     width: 70%;
+  }
+}
+
+
+
+
+/* Full Page Layout for User Management */
+.user-management-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  height: 100vh; /* Full viewport height */
+  background-color: #f9f9f9;
+  font-family: 'Poppins', sans-serif;
+}
+
+.user-details-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.user-header h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.user-header p {
+  color: #777;
+  font-size: 1rem;
+}
+
+.wallet-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.user-wallet {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.orders-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.orders-button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.orders-button:hover {
+  background-color: #45a049;
+}
+
+.logout-section {
+  width: 100%;
+  text-align: center;
+}
+
+.logout-button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #e53935;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-management-page {
+    padding: 10px;
+  }
+
+  .user-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .user-wallet {
+    font-size: 1.3rem;
+  }
+
+  .orders-button, .logout-button {
+    padding: 10px 20px;
+    font-size: 1rem;
   }
 }
