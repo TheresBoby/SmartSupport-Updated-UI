@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext'; // Correct path to CartContext.js
 
 function CartPage() {
   const { cartItems, removeFromCart, clearCart } = useCart(); // Get methods from CartContext
 
+  // Placeholder function to simulate the order placement
+  const placeOrder = () => {
+    // You can replace this with an actual order API call when the backend is ready
+    alert('Your order has been placed successfully!');
+    
+    // Clear the cart after the order is placed
+    clearCart();
+  };
+
+  useEffect(() => {
+    console.log('Cart Items:', cartItems); // Debugging
+  }, [cartItems]);
+
   return (
     <div className="cart-page" style={styles.page}>
-      <h1 style={styles.header}>Your Shopping Cart</h1> {/* Bold, large, centered cart header */}
+      <h1 style={styles.header}>Your Shopping Cart</h1>
       
       {cartItems.length > 0 ? (
         <div>
@@ -14,12 +27,12 @@ function CartPage() {
             {cartItems.map((item, index) => (
               <li key={index} style={styles.cartItem}>
                 <div>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                  <p><strong>₹{item.price}</strong></p>
+                  <h3 style={styles.itemName}>{item.title || "Unnamed Item"}</h3>
+                  <p style={styles.itemDescription}>{item.description || "No description available."}</p>
+                  <p style={styles.itemPrice}><strong>₹{item.price || "0.00"}</strong></p>
                 </div>
                 <button
-                  onClick={() => removeFromCart(item.id)} // Ensure the id is passed to remove only this item
+                  onClick={() => removeFromCart(item.id)}
                   style={styles.removeButton}
                 >
                   Remove
@@ -35,6 +48,11 @@ function CartPage() {
             <button onClick={() => alert('Proceeding to checkout!')} style={styles.checkoutButton}>
               Checkout
             </button>
+            
+            {/* "Order Now" Button */}
+            <button onClick={placeOrder} style={styles.orderButton}>
+              Order Now
+            </button>
           </div>
         </div>
       ) : (
@@ -46,26 +64,22 @@ function CartPage() {
 
 const styles = {
   page: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f8f8',
-    minHeight: '100vh', // Fullscreen height
-    textAlign: 'center',
     padding: '20px',
+    backgroundColor: '#f8f8f8',
+    minHeight: '100vh',
+    textAlign: 'center',
   },
   header: {
     fontSize: '36px',
     fontWeight: 'bold',
-    color: '#333',
+    color: '#2c3e50', // Dark blue-gray
     marginBottom: '20px',
   },
   cartList: {
     listStyle: 'none',
     padding: '0',
+    margin: '0 auto',
     maxWidth: '600px',
-    margin: '0',
     textAlign: 'left',
   },
   cartItem: {
@@ -78,6 +92,22 @@ const styles = {
     borderRadius: '8px',
     boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
   },
+  itemName: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#34495e', // Slate gray
+  },
+  itemDescription: {
+    fontSize: '14px',
+    color: '#7f8c8d', // Muted gray
+    marginBottom: '10px', // Add some space between description and price
+    lineHeight: '1.4', // Improve readability with more space between lines
+  },
+  itemPrice: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#27ae60', // Green
+  },
   removeButton: {
     backgroundColor: '#ff6b6b',
     color: '#fff',
@@ -88,8 +118,6 @@ const styles = {
   },
   buttonsContainer: {
     marginTop: '20px',
-    display: 'flex',
-    justifyContent: 'center',
   },
   clearButton: {
     backgroundColor: '#d9534f',
@@ -107,10 +135,19 @@ const styles = {
     borderRadius: '5px',
     padding: '10px 20px',
     cursor: 'pointer',
+    marginRight: '10px',
+  },
+  orderButton: {
+    backgroundColor: '#f39c12', // Orange color for "Order Now"
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '10px 20px',
+    cursor: 'pointer',
   },
   emptyCart: {
     fontSize: '20px',
-    color: '#555',
+    color: '#555', // Dark gray
   },
 };
 
